@@ -1,0 +1,38 @@
+interpret_stn_task:
+  description: >
+    Analyze the provided Search Trajectory Networks (STNs) for {topic}. 
+    Focus specifically on:
+      1. Key evolutionary pathways
+      2. Regions of exploration and exploitation
+      3. Areas of convergence and stagnation
+      4. Interesting node and edge patterns (high-frequency nodes, critical transition points, etc.)
+  expected_output: >
+    A clear and structured interpretation document summarizing significant patterns, nodes, and evolutionary behaviors observed in the provided STNs. Include specific references to algorithmic behaviors and graph characteristics.
+  agent: stn_interpreter
+
+compare_algorithms_task:
+  description: >
+    Perform a comparative analysis of GA, BO, and CPPN-NEAT algorithms using interpreted insights from the STNs. Specifically:
+      1. Highlight the strengths and weaknesses of each algorithm in terms of exploration efficiency, convergence speed, and adaptability.
+      2. Discuss how algorithm-specific characteristics are reflected in their respective STNs.
+  expected_output: >
+    An insightful comparison document clearly outlining the algorithmic differences and performance implications based on STN visualization insights.
+  agent: algorithm_comparator
+  context:
+    - interpret_stn_task
+
+generate_report_task:
+  description: >
+    Consolidate the STN interpretations and comparative analysis into a comprehensive, professional report. The report should contain:
+      1. Executive Summary
+      2. Detailed interpretation of STNs
+      3. Comparative analysis of algorithm performance
+      4. Conclusions and future recommendations
+      5. Structured clearly with headings and subheadings
+  expected_output: >
+    A polished, well-organized report clearly presenting interpretations, comparisons, and critical insights about STNs and evolutionary algorithms.
+  agent: report_writer
+  context:
+    - interpret_stn_task
+    - compare_algorithms_task
+  output_file: output/stn_analysis_report.md
